@@ -6,10 +6,13 @@ import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
+import java.time.format.DateTimeFormatter
 
 
 class Utils {
     companion object {
+        val TIME_FORMATTER: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")
+
         @Composable
         fun ChangeVisibility(
             passwordVisible: Boolean, setPasswordVisible: (Boolean) -> Unit

@@ -1,10 +1,7 @@
 package com.ik3130.betterdose.data.models
 
-import java.time.LocalDateTime
-
 data class User(
-    val id: String,
-    val email: String,
-    val fullName: String,
-    val createdAt: LocalDateTime
+    val id: String = "000000",
+    val email: String? = "fake@gmail.com",
+    val fullName: String = "Not working"
 )
