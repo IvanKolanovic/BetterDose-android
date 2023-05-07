@@ -105,12 +105,21 @@ fun DeleteAccountScreen(navigator: DestinationsNavigator, authViewModel: AuthVie
     }
 
     TopAppBar(backgroundColor = MaterialTheme.colorScheme.surface,
-        title = { androidx.compose.material.Text(text = "Delete Account", color = MaterialTheme.colorScheme.onSurface) },
+        title = {
+            androidx.compose.material.Text(
+                text = "Delete Account",
+                color = MaterialTheme.colorScheme.onSurface
+            )
+        },
         navigationIcon = {
             IconButton(onClick = {
                 navigator.popBackStack()
             }) {
-                Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "Back icon")
+                Icon(
+                    imageVector = Icons.Filled.ArrowBack,
+                    contentDescription = "Back icon",
+                    tint = MaterialTheme.colorScheme.scrim
+                )
             }
         })
     if (showDeleteAlertDialog) ShowDeleteAlertDialog()

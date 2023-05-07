@@ -1,5 +1,6 @@
 package com.ik3130.betterdose.ui.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Switch
 import androidx.compose.material.SwitchDefaults
@@ -10,8 +11,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ik3130.betterdose.R
 import com.ik3130.betterdose.annotations.AppNavGraph
 import com.ik3130.betterdose.firebase.AuthViewModel
 import com.ik3130.betterdose.ui.screens.destinations.DeleteAccountScreenDestination
@@ -37,6 +41,14 @@ fun ProfileScreen(navigator: DestinationsNavigator, authViewModel: AuthViewModel
         ) {
             Box {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Image(
+                        painter = painterResource(id = R.drawable.betterdose_logo),
+                        contentDescription = "BetterDose Logo",
+                        contentScale = ContentScale.Fit,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(100.dp)
+                    )
                     Text(
                         text = authViewModel.firestoreUser?.fullName ?: "ne radi",
                         fontSize = 18.sp, color = MaterialTheme.colorScheme.scrim,

@@ -52,10 +52,16 @@ fun EditNameScreen(navigator: DestinationsNavigator, authViewModel: AuthViewMode
             )
         },
         navigationIcon = {
-            IconButton(onClick = {
-                navigator.popBackStack()
-            }) {
-                Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "Back icon")
+            IconButton(
+                onClick = {
+                    navigator.popBackStack()
+                },
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.ArrowBack,
+                    contentDescription = "Back icon",
+                    tint = MaterialTheme.colorScheme.scrim
+                )
             }
         })
     Box {
