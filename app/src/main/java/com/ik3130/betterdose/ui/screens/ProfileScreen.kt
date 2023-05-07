@@ -25,8 +25,8 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 fun ProfileScreen(navigator: DestinationsNavigator, authViewModel: AuthViewModel) {
 
     TopAppBar(
-        backgroundColor = MaterialTheme.colorScheme.background,
-        title = { Text(text = "Profile") },
+        backgroundColor = MaterialTheme.colorScheme.surface,
+        title = { Text(text = "Profile", color = MaterialTheme.colorScheme.onSurface) },
     )
     Box(modifier = Modifier.fillMaxSize()) {
 
@@ -39,12 +39,12 @@ fun ProfileScreen(navigator: DestinationsNavigator, authViewModel: AuthViewModel
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
                         text = authViewModel.firestoreUser?.fullName ?: "ne radi",
-                        fontSize = 18.sp,
+                        fontSize = 18.sp, color = MaterialTheme.colorScheme.scrim,
                         modifier = Modifier.padding(bottom = 10.dp)
                     )
                     Text(
                         text = "Email: ${authViewModel.currentUser?.email.toString()}",
-                        fontSize = 14.sp
+                        fontSize = 14.sp, color = MaterialTheme.colorScheme.scrim
                     )
 
                     Spacer(Modifier.size(14.dp))
@@ -58,7 +58,7 @@ fun ProfileScreen(navigator: DestinationsNavigator, authViewModel: AuthViewModel
                             )
                         )
                         Text(
-                            text = "Dark mode", color = MaterialTheme.colorScheme.onBackground
+                            text = "Dark mode", color = MaterialTheme.colorScheme.scrim
                         )
                     }
                     Button(
@@ -69,8 +69,7 @@ fun ProfileScreen(navigator: DestinationsNavigator, authViewModel: AuthViewModel
                     ) {
                         Text(
                             "Edit full name",
-                            color = MaterialTheme.colorScheme.background,
-                            fontSize = 18.sp
+                            fontSize = 18.sp, color = MaterialTheme.colorScheme.onPrimary
                         )
                     }
                     Spacer(Modifier.size(16.dp))
@@ -82,8 +81,7 @@ fun ProfileScreen(navigator: DestinationsNavigator, authViewModel: AuthViewModel
                     ) {
                         Text(
                             "Delete Account",
-                            color = MaterialTheme.colorScheme.background,
-                            fontSize = 18.sp
+                            fontSize = 18.sp, color = MaterialTheme.colorScheme.onPrimary
                         )
                     }
                     Spacer(Modifier.size(16.dp))
@@ -95,8 +93,7 @@ fun ProfileScreen(navigator: DestinationsNavigator, authViewModel: AuthViewModel
                     ) {
                         Text(
                             "Sign Out",
-                            color = MaterialTheme.colorScheme.background,
-                            fontSize = 18.sp
+                            fontSize = 18.sp, color = MaterialTheme.colorScheme.onPrimary
                         )
                     }
                 }

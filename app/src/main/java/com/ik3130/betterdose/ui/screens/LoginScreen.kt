@@ -3,19 +3,20 @@ package com.ik3130.betterdose.ui.screens
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Info
-import androidx.compose.material3.Button
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -42,6 +43,9 @@ fun LoginScreen(navigator: DestinationsNavigator, authViewModel: AuthViewModel) 
     var emailError by remember { mutableStateOf(false) }
     var passwordError by remember { mutableStateOf(false) }
     val loginStatus by authViewModel.userLoginStatus.collectAsState()
+
+    val focusManager = LocalFocusManager.current
+
 
     LaunchedEffect(key1 = loginStatus) {
         when (loginStatus) {
@@ -100,12 +104,17 @@ fun LoginScreen(navigator: DestinationsNavigator, authViewModel: AuthViewModel) 
                 .width(200.dp)
                 .height(100.dp)
         )
-        Text("SIGN IN")
+        Text("SIGN IN", color = MaterialTheme.colorScheme.scrim)
         CustomOutlinedTextField(
             value = email,
             onValueChange = setEmail,
             label = { Text("Email") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+            keyboardActions = KeyboardActions(
+                onNext = { focusManager.moveFocus(FocusDirection.Down) },
+            ),
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Email, imeAction = ImeAction.Next
+            ),
             leadingIcon = {
                 Icon(
                     Icons.Outlined.Email, contentDescription = "Email"
@@ -140,10 +149,10 @@ fun LoginScreen(navigator: DestinationsNavigator, authViewModel: AuthViewModel) 
                 authViewModel.executeLogin(email, password)
             }
         }) {
-            Text("Sign In")
+            Text("Sign In", color = MaterialTheme.colorScheme.onPrimary)
         }
         Spacer(Modifier.size(16.dp))
-        Text(text = "Don't have an account?")
+        Text(text = "Don't have an account?", color = MaterialTheme.colorScheme.scrim)
         TextButton(onClick = { navigator.navigate(RegisterScreenDestination) }) { Text("Sign up") }
     }
 }

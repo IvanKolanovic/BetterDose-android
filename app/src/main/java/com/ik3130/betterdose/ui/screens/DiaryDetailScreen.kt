@@ -28,8 +28,8 @@ fun DiaryDetailScreen(
 ) {
 
     Column {
-        TopAppBar(backgroundColor = MaterialTheme.colorScheme.background,
-            title = { androidx.compose.material.Text(text = topBarTitle) },
+        TopAppBar(backgroundColor = MaterialTheme.colorScheme.surface,
+            title = { androidx.compose.material.Text(text = topBarTitle, color = MaterialTheme.colorScheme.onSurface) },
             navigationIcon = {
                 IconButton(onClick = {
                     navigator.popBackStack()

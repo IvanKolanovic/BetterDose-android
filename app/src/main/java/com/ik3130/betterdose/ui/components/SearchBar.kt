@@ -77,11 +77,11 @@ fun SearchBar(authViewModel: AuthViewModel, state: MutableState<TextFieldValue>)
         singleLine = true,
         shape = RectangleShape, // The TextFiled has rounded corners top left and right by default
         colors = TextFieldDefaults.textFieldColors(
-            textColor = Color.White,
-            cursorColor = Color.White,
-            leadingIconColor = Color.White,
-            trailingIconColor = Color.White,
-            backgroundColor = Color.Red,
+            textColor = MaterialTheme.colorScheme.onPrimary,
+            cursorColor = MaterialTheme.colorScheme.onPrimary,
+            leadingIconColor = MaterialTheme.colorScheme.onPrimary,
+            trailingIconColor = MaterialTheme.colorScheme.onPrimary,
+            backgroundColor = MaterialTheme.colorScheme.primary,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
             disabledIndicatorColor = Color.Transparent

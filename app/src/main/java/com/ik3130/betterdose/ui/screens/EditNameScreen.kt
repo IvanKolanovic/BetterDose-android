@@ -44,8 +44,13 @@ fun EditNameScreen(navigator: DestinationsNavigator, authViewModel: AuthViewMode
         }
     }
 
-    TopAppBar(backgroundColor = MaterialTheme.colorScheme.background,
-        title = { androidx.compose.material.Text(text = "Change full name") },
+    TopAppBar(backgroundColor = MaterialTheme.colorScheme.surface,
+        title = {
+            androidx.compose.material.Text(
+                text = "Change full name",
+                color = MaterialTheme.colorScheme.onSurface
+            )
+        },
         navigationIcon = {
             IconButton(onClick = {
                 navigator.popBackStack()
@@ -84,8 +89,7 @@ fun EditNameScreen(navigator: DestinationsNavigator, authViewModel: AuthViewMode
             ) {
                 androidx.compose.material.Text(
                     "Update full name",
-                    color = MaterialTheme.colorScheme.background,
-                    fontSize = 18.sp
+                    fontSize = 18.sp, color = MaterialTheme.colorScheme.onPrimary
                 )
             }
         }

@@ -62,6 +62,7 @@ class AuthViewModel(val auth: FirebaseAuth) : ViewModel() {
         Log.i("USER UPDATE", currentUser.toString())
         currentUser = user
         if (user != null) this.fetchAndSetUser(user.uid)
+        loading = false
     }
 
     @JvmName("assignCurrentDestination")
@@ -71,11 +72,13 @@ class AuthViewModel(val auth: FirebaseAuth) : ViewModel() {
 
     fun executeMedSearch(medName: String) {
         viewModelScope.launch {
+            loading = true
             val query = "openfda.brand_name:${medName.trim()}"
             val result = openFdaApi.getDrugByName(query)
             if (result.isSuccessful && result.body() != null && result.body()!!.results.isNotEmpty()) {
                 medication = result.body()!!.results[0]
             }
+            loading = false
         }
     }
 
@@ -88,6 +91,7 @@ class AuthViewModel(val auth: FirebaseAuth) : ViewModel() {
     }
 
     fun executeLogin(email: String, password: String) {
+        loading = true
         FirebaseAuthService.login(email, password, firebaseAuth, onSuccess = {
             _userLoginStatus.value = UserLoginStatus.Successful; Log.i(
             "LOGIN SUCCESS", _userLoginStatus.value.toString()
@@ -98,6 +102,7 @@ class AuthViewModel(val auth: FirebaseAuth) : ViewModel() {
             "LOGIN FAIL", _userLoginStatus.value.toString()
         )
         })
+        loading = false
     }
 
     fun executeSignOut() {
@@ -107,6 +112,7 @@ class AuthViewModel(val auth: FirebaseAuth) : ViewModel() {
     }
 
     fun executeRegister(email: String, password: String, fullName: String) {
+        loading = true
         FirebaseAuthService.register(email, password, firebaseAuth, onSuccess = {
             _userRegisterStatus.value = UserRegisterStatus.Successful; Log.i(
             "REGISTER SUCCESS", _userRegisterStatus.value.toString()
@@ -121,6 +127,7 @@ class AuthViewModel(val auth: FirebaseAuth) : ViewModel() {
             "LOGIN FAIL", _userRegisterStatus.value.toString()
         )
         })
+        loading = false
     }
 
     private fun createUser(user: User) {

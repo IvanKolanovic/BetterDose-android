@@ -8,6 +8,7 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,7 +23,7 @@ fun DiaryDetailRow(
         modifier = modifier, verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = text,
+            text = text, color = MaterialTheme.colorScheme.onPrimary,
             modifier = Modifier
                 .weight(1f)
                 .padding(start = 16.dp),

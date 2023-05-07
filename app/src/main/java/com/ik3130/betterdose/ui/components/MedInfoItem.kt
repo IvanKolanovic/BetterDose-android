@@ -21,13 +21,13 @@ fun MedInfoItem(labelName: String, medInfo: String, modifier: Modifier = Modifie
             ) {
                 Text(
                     text = labelName,
-                    fontSize = 16.sp,
+                    fontSize = 15.sp,
                     color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.Medium
                 )
                 Spacer(modifier = Modifier.size(10.dp))
                 Text(
-                    text = medInfo, fontSize = 14.sp, color = MaterialTheme.colorScheme.primary
+                    text = medInfo, fontSize = 14.sp, color = MaterialTheme.colorScheme.scrim
                 )
             }
             // fixes the horizontal arrangement of the items for some reason

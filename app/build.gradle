@@ -88,8 +88,10 @@ dependencies {
     // coroutine
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
-   // implementation 'com.github.tapadoo:alerter:7.2.4'
+    implementation 'com.google.accompanist:accompanist-pager:0.25.1'
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
 }
+
 // Allow references to generated code
 kapt {
     correctErrorTypes = true

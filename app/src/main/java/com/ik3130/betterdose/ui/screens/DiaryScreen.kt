@@ -51,7 +51,7 @@ fun DiaryScreen(navigator: DestinationsNavigator, authViewModel: AuthViewModel) 
                 .height(45.dp)
         ) {
             Text(
-                "Medical diary", color = MaterialTheme.colorScheme.background, fontSize = 18.sp
+                "Medical diary", color = MaterialTheme.colorScheme.onPrimary, fontSize = 18.sp
             )
         }
         Spacer(modifier = Modifier.size(20.dp))
@@ -69,15 +69,15 @@ fun DiaryScreen(navigator: DestinationsNavigator, authViewModel: AuthViewModel) 
                 .height(45.dp)
         ) {
             Text(
-                "Mood diary", color = MaterialTheme.colorScheme.background, fontSize = 18.sp
+                "Mood diary", color = MaterialTheme.colorScheme.onPrimary, fontSize = 18.sp
             )
         }
     }
 
 
     Column {
-        TopAppBar(backgroundColor = MaterialTheme.colorScheme.background,
-            title = { Text(text = "Medical diary") })
+        TopAppBar(backgroundColor = MaterialTheme.colorScheme.surface,
+            title = { Text(text = "Medical diary", color = MaterialTheme.colorScheme.onSurface) })
 
         Column(
             Modifier

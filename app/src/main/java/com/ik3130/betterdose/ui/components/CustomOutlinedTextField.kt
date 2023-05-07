@@ -26,7 +26,7 @@ fun CustomOutlinedTextField(
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     customErrorMessage: String,
     isError: Boolean,
-    isPassword: Boolean = false
+    isPassword: Boolean = false,
 ) {
     OutlinedTextField(
         value = value,
@@ -56,5 +56,6 @@ fun CustomOutlinedTextField(
                 )
             }
         },
+
     )
 }

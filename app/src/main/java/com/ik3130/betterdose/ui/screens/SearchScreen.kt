@@ -68,14 +68,15 @@ fun SearchScreen(
 
 @Composable
 fun DefaultView() {
-    Spacer(modifier = Modifier.size(400.dp))
+    Spacer(modifier = Modifier.size(340.dp))
     Image(
         painter = painterResource(id = R.drawable.doctors),
         contentDescription = "BetterDose Logo",
-        contentScale = ContentScale.Fit,
+        contentScale = ContentScale.FillWidth,
         modifier = Modifier
             .fillMaxWidth()
-            .height(300.dp)
+            .height(260.dp)
+            .padding(top = 10.dp)
     )
 }
 
@@ -93,17 +94,17 @@ fun MedView(
     Text(
         text = medication.openFda.brandName[0],
         fontSize = 18.sp,
-        color = MaterialTheme.colorScheme.primary,
+        color = MaterialTheme.colorScheme.scrim,
         fontWeight = FontWeight.Medium,
-        modifier = Modifier.padding(top = 10.dp)
+        modifier = Modifier.padding(top = 10.dp, bottom = 15.dp)
     )
     CustomDivider(width = 325.dp, height = 1.dp, color = MaterialTheme.colorScheme.primary)
     Text(
         text = "Medication data",
         fontSize = 20.sp,
-        color = MaterialTheme.colorScheme.primary,
+        color = MaterialTheme.colorScheme.scrim,
         fontWeight = FontWeight.Medium,
-        modifier = Modifier.padding(top = 20.dp, bottom = 10.dp)
+        modifier = Modifier.padding(top = 10.dp, bottom = 10.dp)
     )
 
     MedInfoItem(

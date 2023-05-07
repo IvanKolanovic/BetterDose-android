@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,7 +38,6 @@ fun CustomRating(
             )
 
         )
-
         Toast.makeText(context, "Mood recorded.", Toast.LENGTH_SHORT).show()
     }) {
         Image(
@@ -51,7 +51,7 @@ fun CustomRating(
         Text(
             text = text, modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .padding(top = 45.dp)
+                .padding(top = 45.dp), color = MaterialTheme.colorScheme.scrim
         )
     }
 
