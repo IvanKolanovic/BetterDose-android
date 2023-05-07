@@ -34,7 +34,7 @@ fun DiaryDetailScreen(
                 IconButton(onClick = {
                     navigator.popBackStack()
                 }) {
-                    Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "Back icon")
+                    Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "Back icon", tint =MaterialTheme.colorScheme.scrim )
                 }
             })
 

@@ -20,6 +20,7 @@ import com.ik3130.betterdose.data.models.Medication
 import com.ik3130.betterdose.data.models.Report
 import com.ik3130.betterdose.data.models.User
 import com.ik3130.betterdose.repos.OpenFDAApi
+import com.ik3130.betterdose.scheduler.AlarmSchedulerImpl
 import com.ik3130.betterdose.ui.screens.NavGraphs
 import com.ik3130.betterdose.ui.screens.destinations.Destination
 import com.ik3130.betterdose.ui.screens.destinations.DiaryScreenDestination
@@ -29,7 +30,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlin.streams.toList
 
-class AuthViewModel(val auth: FirebaseAuth) : ViewModel() {
+class AuthViewModel(val auth: FirebaseAuth, val alarmSchedulerImpl: AlarmSchedulerImpl) :
+    ViewModel() {
     private val _userLoginStatus = MutableStateFlow<UserLoginStatus?>(null)
     var userLoginStatus = _userLoginStatus.asStateFlow()
     private val _userRegisterStatus = MutableStateFlow<UserRegisterStatus?>(null)
@@ -49,6 +51,9 @@ class AuthViewModel(val auth: FirebaseAuth) : ViewModel() {
     var loading by mutableStateOf(false)
     var currentDestination by mutableStateOf(NavGraphs.app.startAppDestination)
         private set
+    var showSearchFailedDialog by mutableStateOf(false)
+        private set
+
 
     init {
         auth.addAuthStateListener { auth ->
@@ -70,6 +75,11 @@ class AuthViewModel(val auth: FirebaseAuth) : ViewModel() {
         currentDestination = destination
     }
 
+    @JvmName("assignShowSearchFailedDialog")
+    fun setShowSearchFailedDialog(flag: Boolean) {
+        showSearchFailedDialog = flag
+    }
+
     fun executeMedSearch(medName: String) {
         viewModelScope.launch {
             loading = true
@@ -77,15 +87,16 @@ class AuthViewModel(val auth: FirebaseAuth) : ViewModel() {
             val result = openFdaApi.getDrugByName(query)
             if (result.isSuccessful && result.body() != null && result.body()!!.results.isNotEmpty()) {
                 medication = result.body()!!.results[0]
+            } else {
+                setShowSearchFailedDialog(true)
             }
-            loading = false
         }
     }
 
     fun createDiaryEntry(request: Diary) {
         db.collection("Diary").document(request.id).set(request).addOnSuccessListener {
             medication = null
-            //navController.navigate(DiaryScreenDestination.invoke())
+            alarmSchedulerImpl.scheduler(request)
             setCurrentDestination(DiaryScreenDestination)
         }
     }
@@ -189,11 +200,17 @@ class AuthViewModel(val auth: FirebaseAuth) : ViewModel() {
                         .sorted { o1, o2 -> o2.takeAt.compareTo(o1.takeAt) }.toList()
                 }
         }
-
     }
 
     fun deleteDoc(collection: String, docId: String) {
         viewModelScope.launch {
+            if (collection == "Diary") {
+                db.collection(collection).document(docId).get().addOnSuccessListener {
+                    val diary = it.toObject(Diary::class.java)
+                    if (diary != null)
+                        alarmSchedulerImpl.cancel(diary)
+                }
+            }
             db.collection(collection).document(docId).delete()
             // navController.navigate(DiaryScreenDestination.invoke())
             when (collection) {

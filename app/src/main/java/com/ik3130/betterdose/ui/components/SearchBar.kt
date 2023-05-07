@@ -37,6 +37,7 @@ fun SearchBar(authViewModel: AuthViewModel, state: MutableState<TextFieldValue>)
         keyboardActions = KeyboardActions(
             onSearch = {
                 authViewModel.executeMedSearch(state.value.text)
+
             }
         ),
         value = state.value,

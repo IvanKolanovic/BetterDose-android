@@ -18,7 +18,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.ik3130.betterdose.data.models.Report
 import com.ik3130.betterdose.firebase.AuthViewModel
-import com.ik3130.betterdose.notifications.NotificationsService
 import com.ik3130.betterdose.ui.Utils
 import java.time.LocalDateTime
 
@@ -26,7 +25,6 @@ import java.time.LocalDateTime
 fun CustomRating(
     text: String, resDrawableId: Int, authViewModel: AuthViewModel
 ) {
-    val notificationService = NotificationsService(LocalContext.current)
     val context = LocalContext.current
 
     Box(Modifier.clickable {

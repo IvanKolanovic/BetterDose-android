@@ -23,7 +23,7 @@ fun DiaryDetailRow(
         modifier = modifier, verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = text, color = MaterialTheme.colorScheme.onPrimary,
+            text = text, color = MaterialTheme.colorScheme.scrim,
             modifier = Modifier
                 .weight(1f)
                 .padding(start = 16.dp),

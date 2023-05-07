@@ -2,7 +2,9 @@ package com.ik3130.betterdose.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.AlertDialog
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -52,17 +54,38 @@ fun SearchScreen(
     val textState = remember { mutableStateOf(TextFieldValue("")) }
     val date = remember { mutableStateOf(LocalDate.now()) }
     val time = remember { mutableStateOf(LocalTime.now()) }
-
     val dateDialogState = rememberMaterialDialogState()
     val timeDialogState = rememberMaterialDialogState()
 
+    @Composable
+    fun ShowFailedAlertDialog() {
+        AlertDialog(onDismissRequest = { },
+            confirmButton = {
+                TextButton(onClick = {
+                    authViewModel.setShowSearchFailedDialog(false)
+                }) { Text(text = "OK") }
+            },
+            title = { Text(text = "Not found.") },
+            text = { Text(text = "The requested medicine could not be found.") })
+    }
+
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         SearchBar(authViewModel = authViewModel, state = textState)
-        if (authViewModel.medication != null) MedView(
-            navController,
-            authViewModel, authViewModel.medication!!, dateDialogState, timeDialogState, time, date
-        )
-        else DefaultView()
+
+        if (authViewModel.showSearchFailedDialog)
+            ShowFailedAlertDialog()
+        else {
+            if (authViewModel.medication != null) MedView(
+                navController,
+                authViewModel,
+                authViewModel.medication!!,
+                dateDialogState,
+                timeDialogState,
+                time,
+                date
+            )
+            else DefaultView()
+        }
     }
 }
 
