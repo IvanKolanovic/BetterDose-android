@@ -6,6 +6,6 @@ data class Medication(
     @SerializedName("sponsor_name")
     val sponsorName: String,
     @SerializedName("openfda")
-    val openFda: OpenFDA,
-    val products: List<Product>,
+    val openFda: OpenFDA?,
+    val products: List<Product?> = listOf(),
 )

@@ -6,7 +6,7 @@ data class Product(
     @SerializedName("manufacturer_name")
     val brandName: String,
     @SerializedName("active_ingredients")
-    val activeIngredients: List<Ingredients>,
+    val activeIngredients: List<Ingredients?> = listOf() ,
     @SerializedName("dosage_form")
     val dosageForm: String,
     val route: String,

@@ -115,7 +115,7 @@ fun MedView(
     dateState: MutableState<LocalDate>
 ) {
     Text(
-        text = medication.openFda.brandName[0],
+        text = medication.openFda?.brandName?.get(0) ?: "N/A",
         fontSize = 18.sp,
         color = MaterialTheme.colorScheme.scrim,
         fontWeight = FontWeight.Medium,
@@ -132,37 +132,37 @@ fun MedView(
 
     MedInfoItem(
         labelName = "Brand name: ",
-        medInfo = medication.openFda.brandName[0],
+        medInfo = medication.openFda?.brandName?.get(0) ?: "N/A",
         modifier = Modifier.padding(horizontal = 15.dp)
     )
     MedInfoItem(
         labelName = "Substance: ",
-        medInfo = medication.openFda.substanceName[0],
+        medInfo =  medication.openFda?.substanceName?.get(0) ?: "N/A",
         modifier = Modifier.padding(horizontal = 15.dp)
     )
     MedInfoItem(
         labelName = "Manufacturer: ",
-        medInfo = medication.openFda.manufacturerName[0],
+        medInfo = medication.openFda?.manufacturerName?.get(0) ?: "N/A",
         modifier = Modifier.padding(horizontal = 15.dp)
     )
     MedInfoItem(
         labelName = "Product type: ",
-        medInfo = medication.openFda.productType[0],
+        medInfo = medication.openFda?.productType?.get(0) ?: "N/A",
         modifier = Modifier.padding(horizontal = 15.dp)
     )
     MedInfoItem(
         labelName = "Dosage form: ",
-        medInfo = medication.products[0].dosageForm,
+        medInfo = medication.products[0]?.dosageForm ?: "N/A",
         modifier = Modifier.padding(horizontal = 15.dp)
     )
     MedInfoItem(
         labelName = "Route: ",
-        medInfo = medication.products[0].route,
+        medInfo = medication.products[0]?.route ?: "N/A",
         modifier = Modifier.padding(horizontal = 15.dp)
     )
     MedInfoItem(
         labelName = "Marketing status: ",
-        medInfo = medication.products[0].marketingStatus,
+        medInfo = medication.products[0]?.marketingStatus ?: "N/A",
         modifier = Modifier.padding(horizontal = 15.dp)
     )
     Button(onClick = { dateDialogState.show() }, modifier = Modifier.padding(top = 20.dp)) {
@@ -194,7 +194,7 @@ fun MedView(
             timeState.value = time
             val dateTime: LocalDateTime = LocalDateTime.of(dateState.value, timeState.value)
             val diary = Diary(
-                drugName = medication.openFda.substanceName[0],
+                drugName = medication.openFda?.substanceName?.get(0) ?: "N/A",
                 userId = authViewModel.currentUser!!.uid,
                 takeAt = Utils.TIME_FORMATTER.format(dateTime)
             )
